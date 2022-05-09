@@ -36,14 +36,20 @@ UI.prototype.showAlert = function(message, className) {
   // Create div
   const div = document.createElement('div');
   // Add classes
-  div.classname = `alert ${className}`;
+  div.className = `alert ${className}`;
   // Add text
   div.appendChild(document.createTextNode(message));
   // Get parent
-  const container = document.querySelector('container');
+  const container = document.querySelector('.container');
+  // Get form
+  const form = document.querySelector('#book-form');
+  // Insert alert
+  container.insertBefore(div,form);
 
-  const form = document.querySelector
-
+  //Timeout after 3 sec
+  setTimeout(function(){
+    document.querySelector('.alert').remove();
+  }, 3000);
 }
 
 // Event Listeners
@@ -63,14 +69,14 @@ document.getElementById('book-form').addEventListener('submit',
 
     // Validate
     if(title === '' || author === '' || isbn === '') {
-      UI.showAlert('Please fill in all fields', 'error');
+      ui.showAlert('Please fill in all fields', 'error');
     } else {
       
       // Add book to list
       ui.addBookToList(book);
       
       // Clear fields 
-      // ui.clearFields();
+      ui.clearFields();
 
     }
 
